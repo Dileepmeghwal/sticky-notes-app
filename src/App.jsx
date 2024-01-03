@@ -68,112 +68,119 @@ function App() {
 
   return (
     <>
-      <div className="container-main p-10">
-        <div className="header">
-          <h1 className="text-left mx-5 text-4xl font-bold py-6 mb-3">Notes</h1>
-        </div>
-        <div className="wrapper flex justify-between flex-wrap ">
-          <div className="left shadow-lg rounded-lg bg-slate-200 w-full lg:w-3/12 p-6  mb-3 mx-5">
-            <input
-              type="text"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              placeholder="Title"
-              id=""
-              className="bg-transparent text-wrap break-words w-full py-2 outline-none text-2xl"
-            />
-            <textarea
-              name=""
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              placeholder="Take a note..."
-              id=""
-              cols="30"
-              rows="10"
-              className="bg-transparent w-full py-2 outline-none"
-            ></textarea>
-
-            <button
-              type="submit"
-              className="block bg-slate-300 rounded-md p-1  text-white "
-              onClick={addNotes}
-            >
-              ➕
-            </button>
+      <div className="p-5 bg-white">
+        <div className="rounded-2xl bg-yellow-50 min-h-screen p-10">
+          <div className="header">
+            <h1 className="text-left text-4xl font-bold py-6 mb-3 ">
+              Notes...✏️
+            </h1>
           </div>
+          <div className=" ">
+            <div className="right flex flex-wrap lg:flex-wrap justify-start gap-9">
+              <div className=" lg:w-1/5 md:w-4/12  p-3 relative  mt-6 text-gray-700 dark:text-white bg-white shadow-md bg-clip-border rounded-xl w-96">
+                <input
+                  type="text"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  placeholder="Title"
+                  id=""
+                  className="bg-transparent text-wrap break-words w-full py-2 outline-none text-2xl"
+                />
+                <textarea
+                  name=""
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  placeholder="Take a note..."
+                  id=""
+                  cols="30"
+                  rows="10"
+                  className="bg-transparent w-full py-2 outline-none"
+                ></textarea>
 
-          <div className="right flex flex-wrap m-5 gap-6">
-            {stickyList.length > 0 &&
-              stickyList.map((item) => (
-                <div
-                  key={item.id}
-                  style={{backgroundColor: `${item.bgColor}`}}
-                  class={` shadow-lg rounded-lg w-full lg:w-1/5 md:w-4/12  p-6 `}
+                <button
+                  type="submit"
+                  className="block bg-slate-300 rounded-md p-1  text-white "
+                  onClick={addNotes}
                 >
-                  <div class="text-left">
-                    {isEditable && notesId == item.id ? (
-                      <input
-                        type="text"
-                        name=""
-                        value={editTitle}
-                        onChange={(e) => setEditTitle(e.target.value)}
-                        // placeholder="Title"
-                        id=""
-                        className="bg-transparent w-full py-2 outline-none text-2xl"
-                      />
-                    ) : (
-                      <div className="block">
-                        <h3 className="text-xl text-slate-500 block font-bold">
-                          {item.title}
-                        </h3>
-                      </div>
-                    )}
+                  ➕
+                </button>
+              </div>
+              {stickyList.length > 0 &&
+                stickyList.map((item) => (
+                  <div
+                    key={item.id}
+                    style={{ backgroundColor: `${item.bgColor}` }}
+                    class={` flex flex-col mt-6 bg-white shadow-md bg-clip-border rounded-xl max-h-screen w-96 p-3 relative overflow-hidden`}
+                  >
+                    <div
+                      className="corner w-10 h-10  absolute top-0 right-0 shadow-xl  "
+                      style={{ backgroundColor: `${item.bgColor}` }}
+                    ></div>
+                    <div class="text-left ">
+                      {isEditable && notesId == item.id ? (
+                        <input
+                          type="text"
+                          name=""
+                          value={editTitle}
+                          onChange={(e) => setEditTitle(e.target.value)}
+                          // placeholder="Title"
+                          id=""
+                          className="bg-transparent w-full py-2 outline-none text-2xl"
+                        />
+                      ) : (
+                        <div className="block">
+                          <h3 className="text-xl block font-medium">
+                            {item.title}
+                          </h3>
+                        </div>
+                      )}
 
-                    {isEditable && notesId == item.id ? (
-                      <textarea
-                        name=""
-                        // placeholder="Take a note..."
-                        value={editMessage}
-                        onChange={(e) => setEditMessage(e.target.value)}
-                        id=""
-                        cols="30"
-                        rows="10"
-                        className="bg-transparent w-full py-2 outline-none"
-                      ></textarea>
-                    ) : (
-                      <div className="bg-transparent w-full py-2 outline-none">
-                        {item.message}
-                      </div>
-                    )}
-                  </div>
-                  <div class="px-6 pt-4 pb-2 flex justify-between items-center">
-                    <span>May 21,2023</span>
-                    <button
-                      className="bg-slate-300 py-2 rounded-md p-1 w-2/12 text-white"
-                      onClick={() =>
-                        editNotes(item.id, item.title, item.message)
-                      }
-                    >
-                      📝
-                    </button>
-                    {isEditable && notesId === item.id && (
+                      {isEditable && notesId == item.id ? (
+                        <textarea
+                          name=""
+                          // placeholder="Take a note..."
+                          value={editMessage}
+                          onChange={(e) => setEditMessage(e.target.value)}
+                          id=""
+                          cols="30"
+                          rows="10"
+                          className="bg-transparent w-full py-2 outline-none"
+                        ></textarea>
+                      ) : (
+                        <div className="bg-transparent w-full py-2 outline-none">
+                          {item.message}
+                        </div>
+                      )}
+                    </div>
+                    <div class="px-6 pt-4 pb-2 flex justify-between items-center absolute bottom-0 w-full">
+                      <span>May 21,2023</span>
                       <button
                         className="bg-slate-300 py-2 rounded-md p-1 w-2/12 text-white"
-                        onClick={updateNotes}
+                        onClick={() =>
+                          editNotes(item.id, item.title, item.message)
+                        }
                       >
-                        ✔️
+                        📝
                       </button>
-                    )}
+                      {isEditable && notesId === item.id && (
+                        <button
+                          className="bg-slate-300 py-2 rounded-md p-1 w-2/12 text-white"
+                          onClick={updateNotes}
+                        >
+                          ✔️
+                        </button>
+                      )}
 
-                    <button
-                      className="bg-slate-300 py-2 rounded-md p-1 w-2/12 text-white"
-                      onClick={() => deleteNotes(item.id)}
-                    >
-                      🗑️
-                    </button>
+                      <button
+                        className="bg-slate-300 py-2 rounded-md p-1 w-2/12 text-white"
+                        onClick={() => deleteNotes(item.id)}
+                      >
+                        🗑️
+                      </button>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+            </div>
           </div>
         </div>
       </div>
